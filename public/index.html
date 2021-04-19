@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selfie app</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+      <script>
+          if ("geolocation" in navigator) {
+             console.log('la geolocalización está disponible');
+             navigator.geolocation.getCurrentPosition( async position => {
+                const lat = position.coords.latitude; ;
+                document.getElementById('latitud').textContent = lat;
+                const lon = position.coords.longitude;
+                document.getElementById('longitud').textContent = lon;
+                // console.log(position);
+                const data = {lat, lon};
+                const options = {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+                const response = await fetch('/api', options);
+                const json = await response.json();
+                console.log(json);
+             });
+          } else {
+            console.log('la geolocalización NO está disponible');
+          }
+      </script>
+      <div class="container" style="align-items: center;">
+        <div class="card text-white bg-dark mb-3 center" style="max-width: 18rem;">
+            <div class="card-header"><h4>Geolocalización actual</h4></div>
+            <hr>
+            <div class="card-body " style="text-align: center; color: aqua;">
+              <p class="card-text">
+                latitud: <span id="latitud"></span>&deg;<br>
+                longitud: <span id="longitud"></span>&deg;
+            </p>
+            </div>
+        </div>
+      </div>
+    
+  </body>
+</html>

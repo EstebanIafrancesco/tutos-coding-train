@@ -1,0 +1,20 @@
+{
+  "name": "servidor-con-express",
+  "version": "1.0.0",
+  "description": "The sata selfie app by Joey Lee and explaind by codign train",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "selfie",
+    "learning",
+    "express"
+  ],
+  "author": "Esteban Iafrancesco (Based on Daniel Shiffman)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}
